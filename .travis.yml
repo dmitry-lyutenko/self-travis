@@ -5,7 +5,8 @@ env:
   - ansible_version=2.7.1 ansible_lint_version=3.5.1 tf_version=0.11.10 tf_lint_version=0.7.2
 before_install:
 #- curl https://raw.githubusercontent.com/express42/otus-homeworks/2018-09/run.sh |
-#  bash 
+#  bash
+  - rm -fr terraform
 install:
   # install ansible
   - sudo pip install --upgrade pip
