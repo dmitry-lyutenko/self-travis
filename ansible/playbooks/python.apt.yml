@@ -1,0 +1,10 @@
+---
+- name: Install python-apt
+  hosts: app
+  become: true
+  gather_facts: no
+  tasks:
+    - name: Install python-apt
+      apt:
+        name: ["python-apt"]
+        state: present

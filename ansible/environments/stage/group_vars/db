@@ -1,0 +1,2 @@
+#mongo_bind_ip: 10.11.12.300
+#mongo_bind_ip: {{ hostvars"['db']['mongo_bind_ip']" }}

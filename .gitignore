@@ -1,0 +1,11 @@
+*key*
+*variables*.json
+*.tfstate
+*.tfstate.*.backup
+*.tfstate.backup
+*.tfvars
+.terraform/
+*.pdf
+*.retry
+jdauphant.nginx
+vault.key

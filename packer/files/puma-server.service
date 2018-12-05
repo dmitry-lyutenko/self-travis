@@ -1,0 +1,15 @@
+[Unit]
+Description=Reddit puma service
+After=mongod.service
+Requires=mongod.service
+
+[Service]
+WorkingDirectory=/home/dimon/reddit/
+ExecStop=/bin/kill -s TERM $MAINPID
+ExecStart=/usr/local/bin/puma -d --dir /home/dimon/reddit/
+Restart=always
+Type=forking
+
+[Install]
+WantedBy=multi-user.target
+Alias=reddit.service
