@@ -18,7 +18,9 @@ install:
   - unzip -u tflint_linux_amd64.zip
   # variables
   - mv packer/variables.json.example packer/variables.json
-  - mv packer/variables_immutable.json.example packer/variables_immutable.json
+  - mv packer/variables.json.example packer/variables_immutable.json
+  # set env
+  - export PATH="$PATH:`pwd`"
 script:
   # validate packer
   - packer validate -var-file=packer/variables.json packer/app.json
@@ -29,11 +31,13 @@ script:
   - cd -
   # validate terraform
   - cd terraform/stage
+  - terraform init -backend=false && terraform validate && tflint
   - cd -
   - cd terraform/prod
+  - terraform init -backend=false && terraform validate && tflint
   - cd -
-  - ./terraform version
-  - ./tflint --version
+  - terraform version
+  - tflint --version
 # comment
 notifications:
   slack:
