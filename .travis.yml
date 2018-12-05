@@ -6,9 +6,10 @@ before_install:
 #  bash
 - ls
 - pwd
-- packer validate -var-file=packer/variables.json.example packer/app.json
-- packer validate -var-file=packer/variables.json.example packer/db.json
-- packer validate -var-file=packer/variables.json.example packer/ubuntu16.json
+- packer version
+#- packer validate -var-file=packer/variables.json.example packer/app.json
+#- packer validate -var-file=packer/variables.json.example packer/db.json
+#- packer validate -var-file=packer/variables.json.example packer/ubuntu16.json
 # - packer validate -var-file=packer/variables_immutable.json.example packer/immutable.json
 # comment
 notifications:
