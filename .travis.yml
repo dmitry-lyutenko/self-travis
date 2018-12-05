@@ -19,7 +19,8 @@ install:
   # variables
   - cp packer/variables.json.example packer/variables_immutable.json
   - mv packer/variables.json.example packer/variables.json
-  - mv terraform/terraform.tfvars.example terraform/terraform.tfvars
+  - cp terraform/terraform.tfvars.example terraform/stage/terraform.tfvars
+  - mv terraform/terraform.tfvars.example terraform/prod/terraform.tfvars
   # set env
   - export PATH="$PATH:`pwd`/tools"
 script:
