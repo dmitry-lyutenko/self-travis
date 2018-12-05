@@ -1,0 +1,14 @@
+dist: trusty
+sudo: required
+language: bash
+before_install:
+#- curl https://raw.githubusercontent.com/express42/otus-homeworks/2018-09/run.sh |
+#  bash
+- packer validate -var-file=packer/variables.json.example packer/app.json
+- packer validate -var-file=packer/variables.json.example packer/db.json
+- packer validate -var-file=packer/variables.json.example packer/ubuntu16.json
+- packer validate -var-file=packer/variables_immutable.json.example packer/immutable.json
+notifications:
+  slack:
+    rooms:
+      secure: SbKuh5Cm847c7lFkD9dzQXL1YXs05dEh/Pjf8dKxGwC7fzDIMlkrzEN5ZC5nBJhvZsyrgl0I9weVoLeQQsVJruZkHN9nogNB2+gbd20uw75pDHKNQKCf3vAXydl2PbrLAh4oURCgNZ1KfuVMH05v17nWdHEAVAGRJcR9OPUxgLbai8GD1xmev506Yx8B6ftUUtvV5Gamej6Wjl/G3HIL6DXdbM9NHbXZdtQ9dEOni5xMU1eveUvdJme+nA0CsPE9np3P4l79mX8H1yqyeAiV/UnBAEZg6KcxUGESR7Tc3/bCT4eElyqmWDHtXFqBIxtC3+CCTIy8cRTelLsB5u1ngL2iqN2EsO1SGnxJc0JGKR+bZ1YGd1XHhlh3K+8LEHyNSDSik1xVEQX7R8FU+/XSUQp8Bg1uFVMDZoPT/eJVT+gN2OzcI1ffCbKtx3eP8C5Iw6anRn+fiVNvQ9fbWs/2nQdDaxG7UCePmhQsCb9aBvFGNbKGCMruFogfmACEmld61jfJVXd7kzCKTi5SxERJ4Ts8HgyXZ0RaHtEMxadb/d1B6eJ2X419Vjr885btHULHKueePO3ZBuum272jLRJoxoyw7NGJ4E5Xdjjwciey1snCEOAE+QcPrS2XnzpE+nkDitzpFpU9NlqIMDD1RmTIQkJ3oTuZs/QHiKelcLUI/oE=
