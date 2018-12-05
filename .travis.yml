@@ -17,8 +17,8 @@ install:
   - wget https://github.com/wata727/tflint/releases/download/v${tf_lint_version}/tflint_linux_amd64.zip
   - unzip -u tflint_linux_amd64.zip
   # variables
+  - cp packer/variables.json.example packer/variables_immutable.json
   - mv packer/variables.json.example packer/variables.json
-  - mv packer/variables.json.example packer/variables_immutable.json
   # set env
   - export PATH="$PATH:`pwd`"
 script:
