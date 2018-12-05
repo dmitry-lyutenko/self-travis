@@ -5,28 +5,22 @@ env:
   - ansible_version=2.7.1 ansible_lint_version=3.5.1 tf_version=0.11.10 tf_lint_version=0.7.2
 before_install:
 #- curl https://raw.githubusercontent.com/express42/otus-homeworks/2018-09/run.sh |
-#  bash
-  - rm -fr terraform
+#  bash 
 install:
   # install ansible
   - sudo pip install --upgrade pip
   - sudo pip install ansible==${ansible_version} ansible-lint==${ansible_lint_version}
-  # install terraform
+  # install terraform & tf-lint
+  - mkdir tools
   - wget https://releases.hashicorp.com/terraform/${tf_version}/terraform_${tf_version}_linux_amd64.zip
-  - unzip -u terraform_${tf_version}_linux_amd64.zip
-  # #tf-lint
+  - unzip -u terraform_${tf_version}_linux_amd64.zip 
   - wget https://github.com/wata727/tflint/releases/download/v${tf_lint_version}/tflint_linux_amd64.zip
-  - unzip -u tflint_linux_amd64.zip
+  - unzip -u tflint_linux_amd64.zip -d tools/
   # variables
   - cp packer/variables.json.example packer/variables_immutable.json
   - mv packer/variables.json.example packer/variables.json
   # set env
-  - export PATH="$PATH:`pwd`"
-  - export terraform="`pwd`/terraform"
-  - export tflint="`pwd`/tflint"
-  - echo $PATH
-  - echo $terraform
-  - echo $tflint  
+  - export PATH="$PATH:`pwd`/tools"
 script:
   # validate packer
   - packer validate -var-file=packer/variables.json packer/app.json
@@ -37,15 +31,13 @@ script:
   - cd -
   # validate terraform
   - cd terraform/stage
-  - $terraform init -backend=false && $terraform validate && tflint
+  - terraform init -backend=false && terraform validate && tflint
   - cd -
   - cd terraform/prod
-  - $terraform init -backend=false && $terraform validate && $tflint
+  - terraform init -backend=false && terraform validate && tflint
   - cd -
   - cd ansible
   - ansible-lint playbooks/site.yml --exclude=roles/jdauphant.nginx
-  - $terraform version
-  - $tflint --version
 # comment
 notifications:
   slack:
