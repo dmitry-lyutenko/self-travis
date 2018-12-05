@@ -1,9 +1,15 @@
 dist: trusty
 sudo: required
 language: bash
+env:
+  - ansible_version=2.7.1 ansible_lint_version=3.5.1
 before_install:
 #- curl https://raw.githubusercontent.com/express42/otus-homeworks/2018-09/run.sh |
 #  bash
+ # install ansible
+ - sudo pip install --upgrade pip
+install:
+  - pip install ansible==${ansible_version} ansible-lint==${ansible_lint_version}
 script:
 - packer validate -var-file=packer/variables.json.example packer/app.json
 #- packer validate -var-file=packer/variables.json.example packer/db.json
