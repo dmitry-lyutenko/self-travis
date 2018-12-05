@@ -9,12 +9,12 @@ before_install:
  # install ansible
  - sudo pip install --upgrade pip
 install:
-  - pip install ansible==${ansible_version} ansible-lint==${ansible_lint_version}
+  - sudo pip install ansible==${ansible_version} ansible-lint==${ansible_lint_version}
 script:
-- packer validate -var-file=packer/variables.json.example packer/app.json
-#- packer validate -var-file=packer/variables.json.example packer/db.json
-#- packer validate -var-file=packer/variables.json.example packer/ubuntu16.json
-# - packer validate -var-file=packer/variables_immutable.json.example packer/immutable.json
+  - packer validate -var-file=packer/variables.json.example packer/app.json
+  - packer validate -var-file=packer/variables.json.example packer/db.json
+  - packer validate -var-file=packer/variables.json.example packer/ubuntu16.json
+  - packer validate -var-file=packer/variables_immutable.json.example packer/immutable.json
 # comment
 notifications:
   slack:
