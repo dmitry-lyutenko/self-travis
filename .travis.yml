@@ -21,7 +21,7 @@ install:
   - mv packer/variables.json.example packer/variables.json
   # set env
   - export PATH="$PATH:`pwd`"
-  - export terraform="`pwd`/terraform"
+  - export terraform="`pwd`/terraform/terraform"
   - export tflint="`pwd`/tflint"
   - echo $PATH
   - echo $terraform
