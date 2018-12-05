@@ -36,6 +36,8 @@ script:
   - cd terraform/prod
   - terraform init -backend=false && terraform validate && tflint
   - cd -
+  - cd ansible
+  - ansible-lint playbooks/site.yml --exclude=roles/jdauphant.nginx
   - terraform version
   - tflint --version
 # comment
