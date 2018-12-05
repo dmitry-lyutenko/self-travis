@@ -2,18 +2,20 @@ dist: trusty
 sudo: required
 language: bash
 env:
-  - ansible_version=2.7.1 ansible_lint_version=3.5.1
+  - ansible_version=2.7.1 ansible_lint_version=3.5.1 tf_version=0.11.10
 before_install:
 #- curl https://raw.githubusercontent.com/express42/otus-homeworks/2018-09/run.sh |
-#  bash
- # install ansible
- - sudo pip install --upgrade pip
- # install terraform
- - wget https://releases.hashicorp.com/terraform/${TF_V}/terraform_${TF_V}_linux_amd64.zip -o terraform.zip
- - unzip terraform.zip 
+#  bash 
 install:
+  # install ansible
+  - sudo pip install --upgrade pip
   - sudo pip install ansible==${ansible_version} ansible-lint==${ansible_lint_version}
+  # install terraform
+  - wget https://releases.hashicorp.com/terraform/${tf_version}/terraform_${tf_version}_linux_amd64.zip -o terraform.zip
+  - unzip terraform.zip   
+  # variables
   - mv packer/variables.json.example packer/variables.json
+  - mv packer/variables_immutable.json.example packer/variables_immutable.json
 script:
   - packer validate -var-file=packer/variables.json packer/app.json
   - packer validate -var-file=packer/variables.json packer/db.json
