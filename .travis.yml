@@ -4,7 +4,8 @@ language: bash
 before_install:
 #- curl https://raw.githubusercontent.com/express42/otus-homeworks/2018-09/run.sh |
 #  bash
-- ls && pwd
+- ls
+- pwd
 - packer validate -var-file=packer/variables.json.example packer/app.json
 - packer validate -var-file=packer/variables.json.example packer/db.json
 - packer validate -var-file=packer/variables.json.example packer/ubuntu16.json
