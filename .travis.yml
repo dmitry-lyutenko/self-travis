@@ -21,6 +21,8 @@ install:
   - mv packer/variables.json.example packer/variables.json
   # set env
   - export PATH="$PATH:`pwd`"
+  - echo $PATH
+  - ls -1
 script:
   # validate packer
   - packer validate -var-file=packer/variables.json packer/app.json
