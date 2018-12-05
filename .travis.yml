@@ -38,9 +38,12 @@ script:
   - cd -
   - cd ansible
   - ansible-lint playbooks/site.yml --exclude=roles/jdauphant.nginx
+  - cd -
   - ls -1
   - terraform version
   - ls -1 ./tools
+  - echo $PATH
+  - pwd
 # comment
 notifications:
   slack:
