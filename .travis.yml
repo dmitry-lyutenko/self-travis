@@ -8,6 +8,9 @@ before_install:
 #  bash
  # install ansible
  - sudo pip install --upgrade pip
+ # install terraform
+ - wget https://releases.hashicorp.com/terraform/${TF_V}/terraform_${TF_V}_linux_amd64.zip -o terraform.zip
+ - unzip terraform.zip 
 install:
   - sudo pip install ansible==${ansible_version} ansible-lint==${ansible_lint_version}
   - mv packer/variables.json.example packer/variables.json
@@ -15,8 +18,8 @@ script:
   - packer validate -var-file=packer/variables.json packer/app.json
   - packer validate -var-file=packer/variables.json packer/db.json
   - cd packer
-  - packer validate -var-file=variables.json.example ubuntu16.json
-  - packer validate -var-file=variables_immutable.json.example immutable.json
+  - packer validate -var-file=variables.json ubuntu16.json
+  - packer validate -var-file=variables_immutable.json immutable.json
   - cd -
   - terraform version
 # comment
