@@ -10,11 +10,15 @@ before_install:
  - sudo pip install --upgrade pip
 install:
   - sudo pip install ansible==${ansible_version} ansible-lint==${ansible_lint_version}
+  - mv packer/variables.json.example packer/variables.json
 script:
-  - packer validate -var-file=packer/variables.json.example packer/app.json
-  - packer validate -var-file=packer/variables.json.example packer/db.json
-  - packer validate -var-file=packer/variables.json.example packer/ubuntu16.json
-  - packer validate -var-file=packer/variables_immutable.json.example packer/immutable.json
+  - packer validate -var-file=packer/variables.json packer/app.json
+  - packer validate -var-file=packer/variables.json packer/db.json
+  - cd packer
+  - packer validate -var-file=variables.json.example ubuntu16.json
+  - packer validate -var-file=variables_immutable.json.example immutable.json
+  - cd -
+  - terraform version
 # comment
 notifications:
   slack:
