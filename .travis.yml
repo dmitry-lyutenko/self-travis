@@ -21,8 +21,11 @@ install:
   - mv packer/variables.json.example packer/variables.json
   # set env
   - export PATH="$PATH:`pwd`"
+  - export terraform="`pwd`/terraform"
+  - export tflint="`pwd`/tflint"
   - echo $PATH
-  - ls -1
+  - echo $terraform
+  - echo $tflint  
 script:
   # validate packer
   - packer validate -var-file=packer/variables.json packer/app.json
@@ -33,14 +36,14 @@ script:
   - cd -
   # validate terraform
   - cd terraform/stage
-  - terraform init -backend=false && terraform validate && tflint
+  - ./terraform init -backend=false && ./terraform validate && tflint
   - cd -
   - cd terraform/prod
-  - terraform init -backend=false && terraform validate && tflint
+  - $terraform init -backend=false && $terraform validate && $tflint
   - cd -
   - cd ansible
   - ansible-lint playbooks/site.yml --exclude=roles/jdauphant.nginx
-  - terraform version
+  - ./terraform version
   - tflint --version
 # comment
 notifications:
