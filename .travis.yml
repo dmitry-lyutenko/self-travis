@@ -40,7 +40,7 @@ script:
   - ansible-lint playbooks/site.yml --exclude=roles/jdauphant.nginx
   - ls -1
   - terraform version
-  - ls -1 tools/
+  - ls -1 ./tools
 # comment
 notifications:
   slack:
