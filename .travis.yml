@@ -13,7 +13,7 @@ install:
   # install terraform & tf-lint
   - mkdir tools
   - wget https://releases.hashicorp.com/terraform/${tf_version}/terraform_${tf_version}_linux_amd64.zip
-  - unzip -u terraform_${tf_version}_linux_amd64.zip 
+  - unzip -u terraform_${tf_version}_linux_amd64.zip -d tools/
   - wget https://github.com/wata727/tflint/releases/download/v${tf_lint_version}/tflint_linux_amd64.zip
   - unzip -u tflint_linux_amd64.zip -d tools/
   # variables
