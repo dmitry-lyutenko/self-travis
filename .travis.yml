@@ -11,11 +11,9 @@ install:
   - sudo pip install --upgrade pip
   - sudo pip install ansible==${ansible_version} ansible-lint==${ansible_lint_version}
   # install terraform
-  - wget https://releases.hashicorp.com/terraform/${tf_version}/terraform_${tf_version}_linux_amd64.zip -o terraform.zip
-  - unzip ./terraform.zip
+  - wget https://releases.hashicorp.com/terraform/${tf_version}/terraform_${tf_version}_linux_amd64.zip && unzip terraform_${tf_version}_linux_amd64.zip
   # #tf-lint
-  - wget https://github.com/wata727/tflint/releases/download/v${tf_lint_version}/tflint_linux_amd64.zip -o tf_lint.zip
-  - unzip ./tf_lint.zip
+  - wget https://github.com/wata727/tflint/releases/download/v${tf_lint_version}/tflint_linux_amd64.zip && unzip tflint_linux_amd64.zip
   # variables
   - mv packer/variables.json.example packer/variables.json
   - mv packer/variables_immutable.json.example packer/variables_immutable.json
@@ -33,7 +31,7 @@ script:
   - cd terraform/prod
   - cd -
   - ./terraform version
-  - ./tflint version
+  - ./tflint --version
 # comment
 notifications:
   slack:
